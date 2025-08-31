@@ -1,0 +1,13 @@
+{
+  "name": "tobias-blog",
+  "version": "1.0.0",
+  "description": "Tobias personal blog built with Hugo and LoveIt theme",
+  "scripts": {
+    "build": "hugo --gc --minify",
+    "dev": "hugo server -D",
+    "clean": "rm -rf public"
+  },
+  "devDependencies": {
+    "hugo-bin": "^0.111.3"
+  }
+}
