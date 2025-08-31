@@ -935,13 +935,13 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
         enable = true
 
-        repo = "2TAP2B/2tap2b.github.io"
+        repo = "2TAP2B/b1as-me"
 
-        repoId = "R_kgDOPngNSQ"
+        repoId = "R_kgDOPng0wQ"
 
         category = "Q&A"
 
-        categoryId = "DIC_kwDOPngNSc4CuzyT"
+        categoryId = "DIC_kwDOPng0wc4Cuz8R"
 
         # automatically adapt the current theme i18n configuration when empty
 
