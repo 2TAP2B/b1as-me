@@ -8,6 +8,6 @@
     "clean": "rm -rf public"
   },
   "devDependencies": {
-    "hugo-bin": "^0.111.3"
+    "hugo-extended": "0.145.0"
   }
 }
