@@ -1,0 +1,23 @@
+// Override LoveIt theme variables for purple accent color
+// Purple color palette for light and dark modes
+$purple-light: #8b5cf6; // Main purple for light mode
+$purple-dark: #a78bfa;  // Lighter purple for dark mode
+$purple-hover-light: #7c3aed; // Darker purple for hover in light mode
+$purple-hover-dark: #c4b5fd;  // Even lighter purple for hover in dark mode
+
+// Override global link hover colors
+$global-link-hover-color: $purple-light !default;
+$global-link-hover-color-dark: $purple-hover-dark !default;
+
+// Override single content link colors
+$single-link-color: $purple-light !default;
+$single-link-color-dark: $purple-dark !default;
+$single-link-hover-color: $purple-hover-light !default;
+$single-link-hover-color-dark: $purple-hover-dark !default;
+
+// Override pagination link colors
+$pagination-link-color: $purple-light !default;
+
+// Override blockquote accent color
+$blockquote-color: $purple-light !default;
+$blockquote-color-dark: $purple-dark !default;

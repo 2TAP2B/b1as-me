@@ -10,7 +10,7 @@ theme = "LoveIt"
 
 # website title
 
-title = "My New Hugo Site"
+title = "this is my blog"
 
 
 # determines default content language ["en", "zh-cn", "fr", "pl", ...]
@@ -165,7 +165,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
   # website title for Open Graph and Twitter Cards
 
-  title = "to.b1as.me"
+  title = "2.b1as.me"
 
   # website description for RSS, SEO, Open Graph and Twitter Cards
 
@@ -211,7 +211,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
       # title name
 
-      name = "to.b1as.me"
+      name = "2.b1as.me"
 
       # you can add extra information before the name (HTML format is supported), such as icons
 
@@ -966,6 +966,9 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     [params.page.library]
 
       [params.page.library.css]
+
+        # Custom purple theme CSS
+        customPurple = "css/custom.css"
 
         # someCSS = "some.css"
 

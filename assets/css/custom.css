@@ -1,0 +1,142 @@
+/* Replace LoveIt theme's blue accent color with purple */
+/* Purple accent appears primarily on hover for subtle effect */
+
+:root {
+  /* Purple accent colors */
+  --accent-purple-light: #7c3aed;      /* Purple-600 for light mode */
+  --accent-purple-hover: #5b21b6;      /* Purple-700 for hover */
+  --accent-purple-dark: #a78bfa;       /* Purple-400 for dark mode */
+  --accent-purple-dark-hover: #c4b5fd; /* Purple-300 for hover */
+}
+
+/* Content links - always purple (main content should be clearly marked) */
+.single .content a,
+.single .content a::before,
+.single .content a::after {
+  color: var(--accent-purple-light) !important;
+}
+
+.single .content a:hover,
+.single .content a:active {
+  color: var(--accent-purple-hover) !important;
+}
+
+/* Table of contents - purple on hover and active */
+.toc .toc-content ul a:first-child::before,
+#toc-auto .toc-content ul a:first-child::before {
+  color: var(--accent-purple-light) !important;
+}
+
+#toc-auto .toc-content a.active {
+  color: var(--accent-purple-light) !important;
+}
+
+#toc-auto .toc-content a:hover {
+  color: var(--accent-purple-light) !important;
+}
+
+/* Header anchor links (#) - purple on hover */
+.single .content>h2>.header-mark::before,
+.single .content>h3>.header-mark::before,
+.single .content>h4>.header-mark::before,
+.single .content>h5>.header-mark::before,
+.single .content>h6>.header-mark::before {
+  color: var(--accent-purple-light) !important;
+}
+
+/* Post meta links - purple on hover only */
+.single .post-meta a:hover,
+.single .post-meta a:active {
+  color: var(--accent-purple-hover) !important;
+}
+
+/* Post footer links - purple on hover only */
+.single .post-footer .post-info .post-info-line a:hover,
+.single .post-footer .post-info .post-info-line a:active {
+  color: var(--accent-purple-hover) !important;
+}
+
+/* Archive page links - purple on hover only */
+.archive .archive-item-link:hover {
+  color: var(--accent-purple-light) !important;
+}
+
+/* Home page social links - purple on hover only */
+.home .home-profile .links a:hover {
+  color: var(--accent-purple-light) !important;
+}
+
+/* "Read More" button and similar buttons */
+.summary .post-footer a:hover,
+.home .summary .post-footer a:hover,
+.post-footer .post-nav a:hover {
+  color: var(--accent-purple-light) !important;
+}
+
+/* Search and other UI accents - purple on hover only */
+.search .search-button:hover,
+.menu .menu-item:hover {
+  color: var(--accent-purple-light) !important;
+}
+
+/* DARK MODE - Same hover-based approach */
+[theme="dark"] .single .content a,
+[theme="dark"] .single .content a::before,
+[theme="dark"] .single .content a::after {
+  color: var(--accent-purple-dark) !important;
+}
+
+[theme="dark"] .single .content a:hover,
+[theme="dark"] .single .content a:active {
+  color: var(--accent-purple-dark-hover) !important;
+}
+
+[theme="dark"] .toc .toc-content ul a:first-child::before,
+[theme="dark"] #toc-auto .toc-content ul a:first-child::before {
+  color: var(--accent-purple-dark) !important;
+}
+
+[theme="dark"] #toc-auto .toc-content a.active {
+  color: var(--accent-purple-dark) !important;
+}
+
+[theme="dark"] #toc-auto .toc-content a:hover {
+  color: var(--accent-purple-dark) !important;
+}
+
+[theme="dark"] .single .content>h2>.header-mark::before,
+[theme="dark"] .single .content>h3>.header-mark::before,
+[theme="dark"] .single .content>h4>.header-mark::before,
+[theme="dark"] .single .content>h5>.header-mark::before,
+[theme="dark"] .single .content>h6>.header-mark::before {
+  color: var(--accent-purple-dark) !important;
+}
+
+[theme="dark"] .single .post-meta a:hover,
+[theme="dark"] .single .post-meta a:active {
+  color: var(--accent-purple-dark-hover) !important;
+}
+
+[theme="dark"] .single .post-footer .post-info .post-info-line a:hover,
+[theme="dark"] .single .post-footer .post-info .post-info-line a:active {
+  color: var(--accent-purple-dark-hover) !important;
+}
+
+[theme="dark"] .archive .archive-item-link:hover {
+  color: var(--accent-purple-dark-hover) !important;
+}
+
+[theme="dark"] .home .home-profile .links a:hover {
+  color: var(--accent-purple-dark) !important;
+}
+
+[theme="dark"] .summary .post-footer a:hover,
+[theme="dark"] .home .summary .post-footer a:hover,
+[theme="dark"] .post-footer .post-nav a:hover {
+  color: var(--accent-purple-dark) !important;
+}
+
+[theme="dark"] .search .search-button:hover,
+[theme="dark"] .menu .menu-item:hover {
+  color: var(--accent-purple-dark) !important;
+}

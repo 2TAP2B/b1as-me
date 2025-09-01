@@ -1,0 +1,65 @@
+/* Custom styles for LoveIt theme - Purple accent */
+
+/* Read More button - ensure purple color and hover effect */
+.summary .content .post-button {
+  color: #8b5cf6 !important;
+  border-color: #8b5cf6 !important;
+  transition: all 0.3s ease;
+}
+
+.summary .content .post-button:hover {
+  color: #7c3aed !important;
+  border-color: #7c3aed !important;
+  background-color: rgba(124, 58, 237, 0.1) !important;
+}
+
+[data-theme="dark"] .summary .content .post-button {
+  color: #a78bfa !important;
+  border-color: #a78bfa !important;
+}
+
+[data-theme="dark"] .summary .content .post-button:hover {
+  color: #c4b5fd !important;
+  border-color: #c4b5fd !important;
+  background-color: rgba(196, 181, 253, 0.1) !important;
+}
+
+/* Social icons hover effects */
+.social-links a:hover {
+  color: #8b5cf6 !important;
+}
+
+[data-theme="dark"] .social-links a:hover {
+  color: #a78bfa !important;
+}
+
+/* Table of Contents active link */
+.toc .active > a {
+  color: #8b5cf6 !important;
+}
+
+[data-theme="dark"] .toc .active > a {
+  color: #a78bfa !important;
+}
+
+/* Header anchor links on hover */
+.header-anchor:hover {
+  color: #8b5cf6 !important;
+}
+
+[data-theme="dark"] .header-anchor:hover {
+  color: #a78bfa !important;
+}
+
+/* Tag and category links on hover */
+.post-meta a:hover,
+.post-footer .post-tags a:hover,
+.post-footer .post-categories a:hover {
+  color: #8b5cf6 !important;
+}
+
+[data-theme="dark"] .post-meta a:hover,
+[data-theme="dark"] .post-footer .post-tags a:hover,
+[data-theme="dark"] .post-footer .post-categories a:hover {
+  color: #a78bfa !important;
+}

@@ -11,6 +11,8 @@ images: []
 resources:
 - name: "featured-image"
   src: "featured-image.png"
+- name: featured-image-preview
+  src: featured-image-preview.png
 
 tags: ["shortcodes"]
 categories: ["documentation"]
