@@ -3,7 +3,7 @@ weight: 5
 title: "Emoji Support"
 date: 2019-10-01T17:55:28+08:00
 lastmod: 2019-10-01T17:55:28+08:00
-draft: false
+draft: true
 author: "tobias"
 
 description: "Guide to emoji usage in Hugo and LoveIt."
@@ -20,6 +20,7 @@ lightgallery: true
 ---
 
 Nachdem der Entwickler von [PingvinShare](https://github.com/stonith404/pingvin-share) sein Repository archiviert hat, musste ich mich auf die Suche nach einer würdigen Alternative machen.
+<!--more-->
 
 PingvinShare habe ich seit einer frühen 0.1.x-Version genutzt – es lief immer stabil und sah dabei richtig gut aus. Der Entwickler möchte seinen Fokus nun mehr auf **Pocket ID** legen. Verständlich, denn zwei gut laufende Open-Source-Projekte gleichzeitig zu betreuen, ist ein enormer Aufwand. Ich kann diesen Schritt also gut nachvollziehen – schade ist es trotzdem.
 

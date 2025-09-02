@@ -20,218 +20,196 @@ lightgallery: true
 ---
 
 
-Want to maintain full control over your data?
+Wouldn’t it be pretty cool to self-host handy services like Google Photos, Dropbox, or even a VPN?  
+Do you want full control over your data?
+<!--more-->
 
-A few years ago, I turned my back on the big cloud providers and have been handling the provisioning of such services myself ever since. For me, it's all about data sovereignty – my data is my data, and I don't want to "pay" for services with my information.
+A few years ago, I turned my back on the big cloud providers and have been managing the deployment of such services myself ever since. For me, it’s mainly about data sovereignty – my data is my data, and I don’t want to “pay” for services with my information.
 
-Google and company may offer free services, but they're not really free – you pay with your (meta)data. I want to avoid this kind of "payment." Instead, I take the provisioning of the necessary infrastructure into my own hands.
+Google and the like do offer free services, but they’re not really free – you pay with your (meta)data. I want to avoid that kind of “payment.” Instead, I handle the necessary infrastructure myself.
 
-There are many open-source projects that can not only replace commercial services 1:1 but often even surpass them. In this article, I want to provide you with a foundation to get started with self-hosting.
+There are many open-source projects that not only replace commercial services 1:1 but often outperform them. In this article, I want to give you a foundation to get started with self-hosting.
 
-## Server Hardware Requirements
+---
 
-{{< admonition type=tip title="Hardware Selection" open=true >}}
-For a starting setup, a server with **2-4 CPU cores** and **4-8 GB RAM** is sufficient. You can always upgrade later as your needs grow.
-{{< /admonition >}}
+# 2. Hardware
 
-First, you need a server. There are essentially three ways to obtain one:
+You don’t need much to start self-hosting. Initially, all you need is a PC or laptop. In a pinch, a tablet or smartphone could work too, but I’ll leave those out here.
 
-1. **Purchase dedicated hardware** – Old laptops or mini PCs work great
-2. **Rent a VPS** (Virtual Private Server) from providers like Hetzner, DigitalOcean, or Linode
-3. **Use cloud instances** from AWS, Google Cloud, or Azure
+This PC or laptop will later act as the control center for your server, since the server itself will be run headless.
 
-I recommend starting with a VPS if you're new to server administration. They're affordable, professionally maintained, and you can focus on learning without worrying about hardware failures.
+**What does headless mean?**
 
-![Server Overview](server.png "Different server options for self-hosting")
+> A headless server runs without a connected monitor, mouse, or keyboard. It is usually managed remotely over a network.
 
-## Operating System Setup
+At the start, it doesn’t matter much whether your OS is Linux, macOS, or Windows. Personally, I recommend Linux as your main OS – it’s reliable, flexible, and perfect for self-hosting.  
 
-For the operating system, I strongly recommend **Ubuntu Server LTS** (Long Term Support). It's stable, well-documented, and has excellent community support.
+**Server at home or in the cloud?**
 
-{{< admonition type=warning title="Security First" open=true >}}
-Never use the default SSH port (22) in production. Always change it to a non-standard port and use key-based authentication instead of passwords.
-{{< /admonition >}}
+Now the question arises: do you want to run your server at home or in the cloud?
 
-Here's a basic security hardening checklist:
+**At home:**
 
-```bash
-# Update the system
-sudo apt update && sudo apt upgrade -y
+A Raspberry Pi or a small mini-PC is a good choice. Mini-PCs in particular are an affordable solution. Many companies sell refurbished lease returns, which are perfect for beginners.
 
-# Change SSH port (edit /etc/ssh/sshd_config)
-sudo nano /etc/ssh/sshd_config
-# Change Port 22 to Port 2222 (or any other port)
+**In the cloud:**
 
-# Disable password authentication (use SSH keys instead)
-# Set PasswordAuthentication no
+If you don’t have space at home or don’t want to manage hardware yourself, you can rent a small cloud server for around €5/month.
 
-# Restart SSH service
-sudo systemctl restart ssh
+Personally, I’ve had good experiences with Hetzner and Netcup – this isn’t an ad, just my recommendation based on personal use.
 
-# Install fail2ban for intrusion prevention
-sudo apt install fail2ban -y
+---
+
+# 3. Software
+
+Once the hardware is sorted, it’s time for software.
+
+Short version: I’ve been using Ubuntu Server for years and am extremely happy with it. I recommend starting with it as well.
+
+[Ubuntu Server iso](https://ubuntu.com/download/server)
+
+---
+
+# 4. Server Setup
+
+For starters, I’ll explain the cloud setup with Hetzner, as it’s simpler and requires less effort. A separate article about setting up a home server in a homelab will follow later.
+
+The cloud option is ideal for testing: you can spin up a server, try out different services, and cancel it if needed. No financial risk – starting costs are only about €5/month.
+
+---
+
+## 4.1 Setting Up the Server
+
+Create an account:  
+Sign up with Hetzner and log in at [Hetzner](https://www.hetzner.com/cloud/).
+
+**Create a cloud server:**
+
+* Choose a location (data center).  
+* Select an operating system (I recommend Ubuntu).  
+* Pick the smallest server:  
+  * 2 vCPUs  
+  * 4 GB RAM  
+
+![server-setup-1](./srv1.png)  
+![server-setup-1](./srv2.png)  
+
+This is more than enough to get started.
+
+---
+
+## 4.2 Creating an SSH Key
+
+To securely access your server, you need an SSH key. If you don’t have one, here’s how to create it:
+
+**SSH Key Creation (Windows and Linux)**
+
+Open a terminal (PowerShell on Windows or WSL).
+Run the following command:
+
+```shell
+ssh-keygen -t ed25519
 ```
 
-## Docker: Your Best Friend for Self-Hosting
+Follow the prompts to generate the key.
 
-{{< admonition type=info title="Why Docker?" open=false >}}
-Docker containers provide isolation, easy updates, and consistent environments across different systems. They make self-hosting much more manageable.
-{{< /admonition >}}
+The public key will be saved in `~/.ssh/id_ed25519.pub` (Linux/Mac) or the corresponding directory on Windows.
 
-Install Docker and Docker Compose:
+Open the `id_ed25519.pub` file in a text editor, copy the content, and paste it in the Hetzner dashboard when creating the server.
 
-```bash
-# Install Docker
+![server-setup-1](./srv4.png)
+
+Confirm the setup, and your server will be created. You can cancel anytime if you no longer need it.
+
+---
+
+## 4.3 Configuring Firewall Rules
+
+Once in the Hetzner dashboard:
+
+* Select your server.
+* Set up a firewall: open ports 22, 80, and 443 (TCP).
+
+![server-setup-1](./srv5.png)
+
+**Port explanation:**
+
+* Port 22: for SSH access to the server.
+* Ports 80 and 443: for HTTP and HTTPS so your server can serve websites.
+
+Now your server is secure and ready for the next configurations.
+
+---
+
+# 5. Docker and Docker Compose
+
+You’ll need Docker and Docker Compose installed.
+Don’t worry, it’s simple.
+
+One-liner to install Docker:
+
+```shell
 curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
-
-# Add your user to the docker group
-sudo usermod -aG docker $USER
-
-# Install Docker Compose
-sudo apt install docker-compose -y
-
-# Verify installation
-docker --version
-docker-compose --version
+sudo sh ./get-docker.sh
 ```
 
-![Docker Installation](srv1.png "Docker installation process")
+If you get an error, it might be because `curl` is missing:
 
-## Essential Services to Start With
-
-Here are some excellent services to begin your self-hosting journey:
-
-### 1. File Storage - Nextcloud
-Replace Dropbox/Google Drive with [Nextcloud](https://nextcloud.com/). It offers file sync, calendar, contacts, and much more.
-
-### 2. Media Management - Jellyfin
-[Jellyfin](https://jellyfin.org/) is a fantastic alternative to Plex for managing your media library.
-
-### 3. Password Manager - Vaultwarden
-Self-host [Vaultwarden](https://github.com/dani-garcia/vaultwarden) (Bitwarden-compatible) for secure password management.
-
-### 4. VPN - WireGuard
-Set up [WireGuard](https://www.wireguard.com/) for secure remote access to your network.
-
-![Service Architecture](srv2.png "Common self-hosted services architecture")
-
-## Docker Compose Example
-
-Here's a simple `docker-compose.yml` to get you started with Nextcloud:
-
-```yaml
-version: '3.8'
-
-services:
-  nextcloud:
-    image: nextcloud:latest
-    container_name: nextcloud
-    restart: unless-stopped
-    ports:
-      - "8080:80"
-    volumes:
-      - nextcloud_data:/var/www/html
-    environment:
-      - MYSQL_HOST=db
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-      - MYSQL_PASSWORD=secure_password
-    depends_on:
-      - db
-
-  db:
-    image: mariadb:latest
-    container_name: nextcloud_db
-    restart: unless-stopped
-    volumes:
-      - db_data:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=root_password
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-      - MYSQL_PASSWORD=secure_password
-
-volumes:
-  nextcloud_data:
-  db_data:
+```shell
+apt install curl
 ```
 
-Start the services with:
+## 5.1 Testing Docker
 
-```bash
-docker-compose up -d
+Let’s test if Docker is installed correctly:
+
+```shell
+docker run hello-world
 ```
 
-![Nextcloud Setup](srv3.png "Nextcloud running in Docker containers")
+You should see something like this in your terminal:
 
-## Network Configuration & Reverse Proxy
+```shell
+test@ubuntu-server:~# docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+c1ec31eb5944: Pull complete
+Digest: sha256:5b3cc85e16e3058003c13b7821318369dad01dac3dbb877aac3c28182255c724
+Status: Downloaded newer image for hello-world:latest
 
-{{< admonition type=tip title="Domain Setup" open=true >}}
-Get a domain name and point it to your server's IP address. Services like Cloudflare offer free DNS management.
-{{< /admonition >}}
-
-For running multiple services, you'll want a reverse proxy like **Traefik** or **Nginx Proxy Manager**. They handle:
-
-- SSL certificates (automatic with Let's Encrypt)
-- Subdomain routing
-- Load balancing
-
-![Network Setup](srv4.png "Reverse proxy configuration with multiple services")
-
-## Backup Strategy
-
-{{< admonition type=warning title="Backups Are Critical" open=true >}}
-**The 3-2-1 rule**: 3 copies of your data, on 2 different media, with 1 copy offsite. Never skip backups!
-{{< /admonition >}}
-
-Implement automated backups using tools like:
-
-- **Restic** for encrypted, deduplicating backups
-- **Borg Backup** for efficient incremental backups
-- **rclone** for syncing to cloud storage
-
-```bash
-# Example backup script with restic
-#!/bin/bash
-export RESTIC_REPOSITORY="sftp:backup-server:/backups"
-export RESTIC_PASSWORD="your-secure-password"
-
-restic backup /var/lib/docker/volumes/ \
-  --exclude="*.tmp" \
-  --exclude="*/cache/*"
-
-restic forget --keep-daily 7 --keep-weekly 4 --keep-monthly 12
-restic prune
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
 ```
 
-## Monitoring & Maintenance
+---
 
-Keep an eye on your services with monitoring tools:
+# 6. DNS Setup
 
-- **Uptime Kuma** for service availability monitoring
-- **Prometheus + Grafana** for detailed metrics
-- **Portainer** for Docker container management
+Our goal is to use Docker Compose to easily deploy web services or apps, e.g., under `cloud.2tap2.be` or `immich.2tap2.be`. For requests to resolve correctly, we need a reverse proxy. We’ll use Traefik, which we’ll install later.
 
-![Monitoring Dashboard](srv5.png "Monitoring dashboard showing service health")
+First, set up your DNS records correctly. For example, with Cloudflare:
 
-## Getting Started Checklist
+* Create an entry for `cloud` pointing to your server’s IP.
+* Create a second entry for `immich` also pointing to your server’s IP.
 
-- [ ] Choose your server hardware/VPS
-- [ ] Install Ubuntu Server LTS
-- [ ] Harden SSH configuration
-- [ ] Install Docker and Docker Compose
-- [ ] Set up a reverse proxy
-- [ ] Deploy your first service (I recommend starting with Nextcloud)
-- [ ] Configure automated backups
-- [ ] Set up monitoring
+This lets Traefik handle and route requests properly.
 
-## Conclusion
+If you don’t want to create a separate DNS entry for each subdomain, you can also use a wildcard entry, e.g., `*.homelab`, pointing to your server’s IP. Then you can use any subdomain, like `yopass.homelab.2tap2.be`.
 
-Self-hosting gives you complete control over your data and can save money in the long run. Start small with one or two services and gradually expand your setup as you become more comfortable.
+---
 
-The initial learning curve might seem steep, but the benefits of data sovereignty and the satisfaction of running your own infrastructure make it worthwhile.
+## 7. Useful Tools
 
-{{< admonition type=note title="Community Resources" open=false >}}
+A good development environment makes work much easier.
+I recommend an IDE like Visual Studio Code or the open-source VSCodium.
+
+[VSCodium](https://vscodium.com/)
+[VSCode](https://code.visualstudio.com/)
+
+Both are user-friendly and support numerous helpful plugins. Spending 30 minutes on YouTube to understand the basics is well worth it.
+
+
+
+{{< admonition type=note title="Community Resources" open=true >}}
 Join communities like r/selfhosted on Reddit or check out [awesome-selfhosted](https://github.com/awesome-selfhosted/awesome-selfhosted) on GitHub for more service recommendations.
 {{< /admonition >}}
