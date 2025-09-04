@@ -1,0 +1,98 @@
+{{- define "title" }}
+    {{- .Params.Title | default (T .Section) | default .Section | dict "Some" | T "allSome" }} - {{ .Site.Title -}}
+{{- end -}}
+
+{{- define "content" -}}
+    <div class="page archive">
+        {{- /* Title */ -}}
+        <h2 class="single-title animate__animated animate__pulse animate__faster">
+            {{- .Params.Title | default (T .Section) | default .Section | dict "Some" | T "allSome" -}}
+        </h2>
+
+        {{- /* Posts Grid */ -}}
+        {{- if .Pages -}}
+            {{- $pages := .Pages -}}
+            {{- with .Site.Params.section.paginate | default .Site.Params.paginate -}}
+                {{- $pages = $.Paginate $pages . -}}
+            {{- else -}}
+                {{- $pages = .Paginate $pages -}}
+            {{- end -}}
+            
+            <div class="posts-grid">
+                {{- range $pages.Pages -}}
+                    <article class="post-card">
+                        {{- /* Featured Image */ -}}
+                        {{- $featured := "" -}}
+                        {{- with .Resources.GetMatch "featured-image*" -}}
+                            {{- $featured = . -}}
+                        {{- else -}}
+                            {{- range (where .Resources "ResourceType" "image") -}}
+                                {{- if not $featured -}}
+                                    {{- $featured = . -}}
+                                {{- end -}}
+                            {{- end -}}
+                        {{- end -}}
+                        
+                        <div class="post-card-image">
+                            <a href="{{ .RelPermalink }}">
+                                {{- if $featured -}}
+                                    <img src="{{ $featured.RelPermalink }}" alt="{{ .Title | plainify }}" loading="lazy">
+                                {{- else -}}
+                                    <div class="post-card-placeholder">
+                                        <i class="placeholder-icon fas fa-image"></i>
+                                    </div>
+                                {{- end -}}
+                            </a>
+                        </div>
+                        
+                        {{- /* Content */ -}}
+                        <div class="post-card-content">
+                            <h3 class="post-card-title">
+                                <a href="{{ .RelPermalink }}">{{ .Title | emojify }}</a>
+                            </h3>
+                            
+                            {{- /* Summary */ -}}
+                            {{- if .Summary -}}
+                                <p class="post-card-summary">{{ .Summary | plainify | truncate 120 }}</p>
+                            {{- end -}}
+                            
+                            {{- /* Meta information */ -}}
+                            <div class="post-card-meta">
+                                {{- if .Params.author -}}
+                                    <span class="post-card-author">{{ .Params.author }}</span>
+                                {{- end -}}
+                                <span class="post-card-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    {{ .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }}
+                                </span>
+                                {{- if .ReadingTime -}}
+                                    <span class="post-card-readtime">
+                                        <i class="far fa-clock"></i>
+                                        {{ .ReadingTime }} {{ T "minuteRead" }}
+                                    </span>
+                                {{- end -}}
+                            </div>
+                            
+                            {{- /* Categories/Tags */ -}}
+                            {{- if .Params.categories -}}
+                                <div class="post-card-tags">
+                                    {{- range .Params.categories -}}
+                                        <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}" class="post-card-tag">{{ . }}</a>
+                                    {{- end -}}
+                                </div>
+                            {{- else if .Params.tags -}}
+                                <div class="post-card-tags">
+                                    {{- range (.Params.tags | first 3) -}}
+                                        <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="post-card-tag">{{ . }}</a>
+                                    {{- end -}}
+                                </div>
+                            {{- end -}}
+                        </div>
+                    </article>
+                {{- end -}}
+            </div>
+            
+            {{- partial "paginator.html" . -}}
+        {{- end -}}
+    </div>
+{{- end -}}

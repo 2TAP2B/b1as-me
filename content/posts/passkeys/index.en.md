@@ -18,7 +18,7 @@ categories: ["Security"]
 twemoji: false
 lightgallery: true
 ---
-
+Passkeys are honestly one of the coolest things I've been playing around with recently.
 
 <!--more-->
 

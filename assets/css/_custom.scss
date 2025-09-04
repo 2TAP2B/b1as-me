@@ -1,35 +1,106 @@
 /* Custom styles for LoveIt theme - Purple accent */
 
 /* Read More button - ensure purple color and hover effect */
-.summary .content .post-button {
+.summary .content .post-button,
+.more-link,
+.read-more-link {
   color: #8b5cf6 !important;
   border-color: #8b5cf6 !important;
   transition: all 0.3s ease;
 }
 
-.summary .content .post-button:hover {
+.summary .content .post-button:hover,
+.more-link:hover,
+.read-more-link:hover {
   color: #7c3aed !important;
   border-color: #7c3aed !important;
   background-color: rgba(124, 58, 237, 0.1) !important;
 }
 
-[data-theme="dark"] .summary .content .post-button {
+[theme=dark] .summary .content .post-button,
+[theme=dark] .more-link,
+[theme=dark] .read-more-link {
   color: #a78bfa !important;
   border-color: #a78bfa !important;
 }
 
-[data-theme="dark"] .summary .content .post-button:hover {
+[theme=dark] .summary .content .post-button:hover,
+[theme=dark] .more-link:hover,
+[theme=dark] .read-more-link:hover {
   color: #c4b5fd !important;
   border-color: #c4b5fd !important;
   background-color: rgba(196, 181, 253, 0.1) !important;
 }
 
-/* Social icons hover effects */
+/* Targeted link fixes - only change specific problem links, keep others original */
+
+/* Content links inside posts and pages - but keep author, title, social links original */
+.single .content a:not(.post-meta a):not(.social-links a):not(.archive-item-link),
+.content a:not(.post-meta a):not(.social-links a):not(.archive-item-link):not(.post-title a) {
+  color: #8b5cf6 !important;
+}
+
+.single .content a:not(.post-meta a):not(.social-links a):not(.archive-item-link):hover,
+.content a:not(.post-meta a):not(.social-links a):not(.archive-item-link):not(.post-title a):hover {
+  color: #7c3aed !important;
+}
+
+[theme=dark] .single .content a:not(.post-meta a):not(.social-links a):not(.archive-item-link),
+[theme=dark] .content a:not(.post-meta a):not(.social-links a):not(.archive-item-link):not(.post-title a) {
+  color: #a78bfa !important;
+}
+
+[theme=dark] .single .content a:not(.post-meta a):not(.social-links a):not(.archive-item-link):hover,
+[theme=dark] .content a:not(.post-meta a):not(.social-links a):not(.archive-item-link):not(.post-title a):hover {
+  color: #c4b5fd !important;
+}
+
+/* Keep original colors for social, author, and title links - only purple on hover */
+.social-links a {
+  color: inherit !important; /* Keep original color */
+}
+
 .social-links a:hover {
   color: #8b5cf6 !important;
 }
 
-[data-theme="dark"] .social-links a:hover {
+[theme=dark] .social-links a {
+  color: inherit !important; /* Keep original color */
+}
+
+[theme=dark] .social-links a:hover {
+  color: #a78bfa !important;
+}
+
+/* Keep post metadata (author, category) links in original color - purple on hover only */
+.post-meta a {
+  color: inherit !important; /* Keep original color */
+}
+
+.post-meta a:hover {
+  color: #8b5cf6 !important;
+}
+
+[theme=dark] .post-meta a:hover {
+  color: #a78bfa !important;
+}
+
+/* Keep post titles in original color - purple hover only */  
+.post-title a,
+.post-card-title a {
+  color: inherit !important; /* Keep original color */
+}
+
+.post-title a:hover {
+  color: #8b5cf6 !important;
+}
+
+.post-card-title a:hover {
+  color: #8b5cf6 !important;
+}
+
+[theme=dark] .post-title a:hover,
+[theme=dark] .post-card-title a:hover {
   color: #a78bfa !important;
 }
 
@@ -38,7 +109,7 @@
   color: #8b5cf6 !important;
 }
 
-[data-theme="dark"] .toc .active > a {
+[theme=dark] .toc .active > a {
   color: #a78bfa !important;
 }
 
@@ -47,7 +118,7 @@
   color: #8b5cf6 !important;
 }
 
-[data-theme="dark"] .header-anchor:hover {
+[theme=dark] .header-anchor:hover {
   color: #a78bfa !important;
 }
 
@@ -58,8 +129,312 @@
   color: #8b5cf6 !important;
 }
 
-[data-theme="dark"] .post-meta a:hover,
-[data-theme="dark"] .post-footer .post-tags a:hover,
-[data-theme="dark"] .post-footer .post-categories a:hover {
+[theme=dark] .post-meta a:hover,
+[theme=dark] .post-footer .post-tags a:hover,
+[theme=dark] .post-footer .post-categories a:hover {
   color: #a78bfa !important;
 }
+
+/* Post title links */
+.post-title a {
+  color: inherit !important; /* Keep post titles in their normal color */
+}
+
+/* Navigation and menu links */
+.menu a:hover,
+.header .menu a:hover {
+  color: #8b5cf6 !important;
+}
+
+[theme=dark] .menu a:hover,
+[theme=dark] .header .menu a:hover {
+  color: #a78bfa !important;
+}
+
+/* Footer links */
+.footer a {
+  color: #8b5cf6 !important;
+}
+
+.footer a:hover {
+  color: #7c3aed !important;
+}
+
+[theme=dark] .footer a {
+  color: #a78bfa !important;
+}
+
+[theme=dark] .footer a:hover {
+  color: #c4b5fd !important;
+}
+
+/* Archive page links */
+.archive-item-link,
+.categories-card a,
+.card-item a {
+  color: inherit !important;
+}
+
+.archive-item-link:hover,
+.categories-card a:hover,
+.card-item a:hover {
+  color: #6b7280 !important; /* Subtle gray hover for archive links */
+}
+
+[theme=dark] .archive-item-link:hover,
+[theme=dark] .categories-card a:hover,
+[theme=dark] .card-item a:hover {
+  color: #d1d5db !important; /* Light gray hover for dark mode */
+}
+
+/* Beautiful Posts Grid Layout */
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+@media (max-width: 768px) {
+  .posts-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.post-card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  border: 2px solid rgba(139, 92, 246, 0.2);
+  position: relative;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+[theme=dark] .post-card {
+  background: #292a2d !important;
+  border-color: rgba(167, 139, 250, 0.3);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+[theme=dark] .post-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+  border-color: rgba(167, 139, 250, 0.5);
+}
+
+.post-card-image {
+  width: calc(100% - 1rem);
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  margin: 0.5rem 0.5rem 0 0.5rem;
+  border-radius: 8px;
+}
+
+.post-card-image a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.post-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.post-card:hover .post-card-image img {
+  opacity: 0.9;
+}
+
+.post-card-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  position: relative;
+  border-radius: 8px;
+}
+
+[theme=dark] .post-card-placeholder {
+  background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+}
+
+.placeholder-icon {
+  font-size: 3rem;
+  opacity: 0.8;
+}
+
+.post-card-content {
+  padding: 1.75rem;
+  background: inherit;
+}
+
+[theme=dark] .post-card-content {
+  background: #292a2d !important;
+}
+
+.post-card-title {
+  margin: 0 0 1rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #111827;
+}
+
+[theme=dark] .post-card-title {
+  color: #f9fafb;
+}
+
+.post-card-title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.post-card-title a:hover {
+  color: #8b5cf6 !important;
+}
+
+[theme=dark] .post-card-title a:hover {
+  color: #a78bfa !important;
+}
+
+.post-card-summary {
+  color: #4b5563;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 1.25rem 0;
+  font-weight: 400;
+}
+
+[theme=dark] .post-card-summary {
+  color: #d1d5db !important;
+}
+
+.post-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+[theme=dark] .post-card-meta {
+  color: #d1d5db !important;
+}
+
+.post-card-author {
+  font-weight: 500;
+  color: #8b5cf6;
+}
+
+[theme=dark] .post-card-author {
+  color: #a78bfa;
+}
+
+.post-card-date,
+.post-card-readtime {
+  display: flex;
+  align-items: center;
+}
+
+.post-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.post-card-tag {
+  background: rgba(139, 92, 246, 0.1);
+  color: #8b5cf6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.post-card-tag:hover {
+  background: rgba(139, 92, 246, 0.2);
+  color: #7c3aed;
+  transform: translateY(-1px);
+}
+
+[theme=dark] .post-card-tag {
+  background: rgba(167, 139, 250, 0.2);
+  color: #a78bfa;
+}
+
+[theme=dark] .post-card-tag:hover {
+  background: rgba(167, 139, 250, 0.3);
+  color: #c4b5fd;
+  transform: translateY(-1px);
+}
+
+/* Remove old archive styles */
+.archive-item {
+  display: none;
+}
+
+.archive-item-image {
+  display: none;
+}
+
+/* Force dark mode backgrounds - Using correct LoveIt theme selector */
+[theme=dark] .post-card,
+[theme=dark] .post-card-content {
+  background: #292a2d !important;
+  background-color: #292a2d !important;
+}
+
+/* Ensure proper text colors in dark mode */
+[theme=dark] .post-card-title {
+  color: #f9fafb !important;
+}
+
+[theme=dark] .post-card-summary {
+  color: #9ca3af !important;
+}
+
+[theme=dark] .post-card-meta {
+  color: #9ca3af !important;
+}
+
+/* Specific fixes for remaining blue links - target only "Read Markdown" type links */
+.single .post-footer a,
+.post-copyright a {
+  color: #8b5cf6 !important;
+}
+
+.single .post-footer a:hover,
+.post-copyright a:hover {
+  color: #7c3aed !important;
+}
+
+[theme=dark] .single .post-footer a,
+[theme=dark] .post-copyright a {
+  color: #a78bfa !important;
+}
+
+[theme=dark] .single .post-footer a:hover,
+[theme=dark] .post-copyright a:hover {
+  color: #c4b5fd !important;
+}
+
+
